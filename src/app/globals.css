@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+/*
+ * Axis Intelligence: warm white pages, rounded type, buttons and cards with a solid bottom edge.
+ * Axis red (from the logo) is the accent; green, orange and red carry the risk levels.
+ */
+@theme {
+  --color-axis-red: #d4041c;
+  --color-axis-red-600: #b80318;
+  --color-axis-red-700: #9a0314;
+  --color-axis-maroon: #3d0306;
+  --color-axis-red-50: #fff0ee;
+  --color-axis-red-100: #ffd9d3;
+  --color-ink: #3c3431;
+  --color-ink-800: #2a2522;
+  --color-ink-700: #4b4340;
+  --color-page: #fcfaf8;
+  --color-mist: #f6f2ee;
+  --color-line: #e8e1db;
+  --color-line-dark: #d8cfc7;
+  --color-muted: #8a7f78;
+  --color-good: #46a302;
+  --color-good-400: #58cc02;
+  --color-good-50: #effbe4;
+  --color-warn: #d97a00;
+  --color-warn-400: #ff9600;
+  --color-warn-50: #fff4e0;
+  --color-bad: #d4041c;
+  --color-bad-400: #ff4b4b;
+  --color-bad-50: #fff0ee;
+  --color-sky: #1899d6;
+  --color-sky-400: #1cb0f6;
+  --color-sky-50: #e6f6fe;
+  --font-sans: var(--font-nunito), ui-rounded, ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono-face), ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+html { color-scheme: light; }
+body { background: var(--color-page); color: var(--color-ink); -webkit-font-smoothing: antialiased; font-weight: 600; }
+::selection { background: var(--color-axis-red-100); }
+:focus-visible { outline: 3px solid var(--color-sky-400); outline-offset: 2px; }
+
+/* ── pressable surfaces ──────────────────────────────────────────────── */
+/* a button that sits on a solid edge and sinks into it when pressed */
+.btn-3d {
+  --edge: var(--color-axis-red-700);
+  position: relative;
+  box-shadow: 0 4px 0 var(--edge);
+  transition: transform 90ms ease, box-shadow 90ms ease, filter 150ms ease, background-color 150ms ease;
+}
+.btn-3d:hover:not(:disabled) { filter: brightness(1.06); }
+.btn-3d:active:not(:disabled) { transform: translateY(4px); box-shadow: 0 0 0 var(--edge); }
+.btn-3d:disabled { cursor: not-allowed; filter: saturate(0.35) brightness(1.1); }
+.edge-red { --edge: var(--color-axis-red-700); }
+.edge-line { --edge: var(--color-line-dark); }
+.edge-good { --edge: var(--color-good); }
+.edge-white { --edge: rgba(255, 255, 255, 0.35); }
+
+/* a card with a thick bottom edge */
+.card-3d { border: 2px solid var(--color-line); box-shadow: 0 4px 0 var(--color-line); }
+
+/* the one dark surface: the "Need help?" card */
+.warm-dark { background: #2a2320; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
+
+/* ── motion: only the result panel fades in ──────────────────────────── */
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+.anim-fade { animation: fade 400ms ease-out both; }
+@media (prefers-reduced-motion: reduce) {
+  .anim-fade { animation: none; }
+  * { transition-duration: 0ms !important; }
+}
